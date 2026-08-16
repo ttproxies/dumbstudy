@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Header from './components/Header';
 import "./App.css";
 
 const BACKEND_PORT = 5123;
@@ -31,6 +32,7 @@ export default function App() {
 
     return (
         <div className="App">
+            <Header ></Header>
             <h1>my awesome app using react-ts and Express.js</h1>
             {loading ? <p>loading ...</p> : <p>{message}</p>}
         </div>
