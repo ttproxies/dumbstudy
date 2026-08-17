@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/api/hai', (req, res) => {
-    res.json({ message: "hai !!" });
+    res.json({ message: "server message hai helo !!" });
 });
 
 app.listen(PORT, () => {

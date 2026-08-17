@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Header from './components/Header';
 import Clock from './components/Clock';
-import "./App.css";
+import "./css/App.css";
 
 const BACKEND_PORT = 5123;
 

@@ -13,7 +13,7 @@ export default function ButtonCont() {
             </li>
             <li className="button-cont__item">
                 <a href="" className="link link--textual">
-                    item
+                    item3
                 </a>
             </li>
         </ul>

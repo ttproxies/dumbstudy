@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import ButtonCont from "./ButtonCont";
+import cycles from "../configs/cycles.js";
 
 export default function Clock() {
-    const durSec = 3;
+    let [cyclesCompleted, setCyclesCompleted] = useState(0);
+    let [curCycle, setCurCycle] = useState(0);
+
+    const durSec = cycles.durations[cycles.pattern[cyclesCompleted % cycles.pattern.length]];
 
     let [remaining, setRemaining] = useState(durSec);
     let [counting, setCounting] = useState(false);
@@ -15,8 +19,9 @@ export default function Clock() {
                     // Errors with type assignment number | void: means sometimes void = nothing is returned
                     if (prev <= 1) {
                         clearInterval(countdown);
+                        setCyclesCompleted(cyclesCompleted + 1);
                         setCounting(false);
-                        return durSec;
+                        return 0;
                     }
 
                     return prev - 1;
