@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import ButtonCont from "./ButtonCont";
 
 export default function Clock() {
-    const dur = 3000; // 50min
+    const durSec = 3;
 
-    let [remaining, setRemaining] = useState(dur);
+    let [remaining, setRemaining] = useState(durSec);
     let [counting, setCounting] = useState(false);
 
     useEffect(() => {
@@ -15,7 +15,8 @@ export default function Clock() {
                     // Errors with type assignment number | void: means sometimes void = nothing is returned
                     if (prev <= 1) {
                         clearInterval(countdown);
-                        return 0;
+                        setCounting(false);
+                        return durSec;
                     }
 
                     return prev - 1;
