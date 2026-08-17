@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import ButtonCont from "./ButtonCont";
 
 export default function Header() {
     return (
@@ -8,17 +9,7 @@ export default function Header() {
                     <h1>dumbstudy</h1>
                 </div>
                 <nav className="header__nav">
-                    <ul className="button-cont button-cont--horizontal">
-                        <li className="button-cont__item">
-                            <a href="" className="link link--textual">link1</a>
-                        </li>
-                        <li className="button-cont__item">
-                            <a href="" className="link link--textual">link2</a>
-                        </li>
-                        <li className="button-cont__item">
-                            <a href="" className="link link--textual">link3</a>
-                        </li>
-                    </ul>
+                    <ButtonCont></ButtonCont>
                 </nav>
             </header>
         </>
