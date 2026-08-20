@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Clock from "./components/Clock";
@@ -12,7 +12,6 @@ export default function App() {
     // useEffect is a react hook to run ""side-effects"".
     // Run code on mount (empty array for dependencies)
     useEffect(() => {
-        // using async-await syntax for funsies
         const fetchApiMessage = async () => {
             try {
                 const res = await fetch(
@@ -34,14 +33,19 @@ export default function App() {
     return (
         <>
             <GlobalStyle></GlobalStyle>
-            <div className="Application">
+            <main>
                 <Header></Header>
                 <Clock></Clock>
-                {loading ? <p>loading ...</p> : <p>{message}</p>}
-            </div>
+                <ServerMessage>{loading ? <p>loading ...</p> : <p>{message}</p>}</ServerMessage>
+            </main>
         </>
     );
 }
+
+const ServerMessage = styled.h1`
+    font-style: oblique;
+    font-size: 0.75rem;
+`
 
 const GlobalStyle = createGlobalStyle`
     * {
@@ -52,5 +56,10 @@ const GlobalStyle = createGlobalStyle`
 
     body {
         font-family: "Noto Sans Mono", monospace
+    }
+
+    body > * {
+        max-width: 800px;
+        margin: auto;
     }
 `;

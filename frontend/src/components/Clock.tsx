@@ -51,14 +51,14 @@ export default function Clock() {
     const time = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
 
     return (
-        <div className="clock">
+        <ClockContainer>
             <div className="clock__options">
                 <ButtonCont></ButtonCont>
             </div>
             <div className="clock__watch">
                 <div className="clock__status">
-                    <CurrentTimerMode>{curMode}</CurrentTimerMode>
-                    <div>{time}</div>
+                    <TimerMode>{curMode}</TimerMode>
+                    <TimerRemaining>{time}</TimerRemaining>
                 </div>
                 <button
                     className="clock__toggle"
@@ -69,12 +69,23 @@ export default function Clock() {
                     {counting ? "pause" : "start"}
                 </button>
             </div>
-        </div>
+        </ClockContainer>
     );
 }
 
 // css
 
-const CurrentTimerMode = styled.div`
-        text-align: center;
+const TimerRemaining = styled.div`
+    font-size: 6rem;
+    font-weight: 800;
+`
+
+const TimerMode = styled.div`
+    text-align: center;
+`;
+
+const ClockContainer = styled.div`
+    text-align: center;
+    max-width: 500px;  
+    margin: auto;
 `;
