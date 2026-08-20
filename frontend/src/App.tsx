@@ -1,7 +1,7 @@
+import { createGlobalStyle } from "styled-components";
 import { useState, useEffect } from "react";
-import Header from './components/Header';
-import Clock from './components/Clock';
-import "./css/App.css";
+import Header from "./components/Header";
+import Clock from "./components/Clock";
 
 const BACKEND_PORT = 5123;
 
@@ -32,10 +32,25 @@ export default function App() {
     }, []);
 
     return (
-        <div className="App">
-            <Header></Header>
-            <Clock></Clock>
-            {loading ? <p>loading ...</p> : <p>{message}</p>}
-        </div>
+        <>
+            <GlobalStyle></GlobalStyle>
+            <div className="Application">
+                <Header></Header>
+                <Clock></Clock>
+                {loading ? <p>loading ...</p> : <p>{message}</p>}
+            </div>
+        </>
     );
 }
+
+const GlobalStyle = createGlobalStyle`
+    * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+    }
+
+    body {
+        font-family: "Noto Sans Mono", monospace
+    }
+`;

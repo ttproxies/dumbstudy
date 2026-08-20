@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import styled from "styled-components";
 import ButtonCont from "./ButtonCont";
 import cyclesConfig from "../configs/cycles";
 
@@ -56,7 +57,7 @@ export default function Clock() {
             </div>
             <div className="clock__watch">
                 <div className="clock__status">
-                    <div>{curMode}</div>
+                    <CurrentTimerMode>{curMode}</CurrentTimerMode>
                     <div>{time}</div>
                 </div>
                 <button
@@ -71,3 +72,9 @@ export default function Clock() {
         </div>
     );
 }
+
+// css
+
+const CurrentTimerMode = styled.div`
+        text-align: center;
+`;
