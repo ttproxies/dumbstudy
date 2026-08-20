@@ -2,9 +2,9 @@
 
 const cyclesConfig = {
     durations: {
-        "Work": 3000,
-        "Short Break": 600,
-        "Long Break": 1200
+        "Work": 5,
+        "Short Break": 1,
+        "Long Break": 2
     },
     modeNames: ["Work", "Short Break", "Long Break"],
     modeTypes: 3,

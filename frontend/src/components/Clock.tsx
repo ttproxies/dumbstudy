@@ -4,14 +4,8 @@ import cyclesConfig from "../configs/cycles";
 
 export default function Clock() {
     const [curCycle, setCurCycle] = useState(1); // The current cycle iteration
-    const [curMode, setCurMode] = useState<keyof typeof cyclesConfig.durations>("Work")
-
-    if (curMode === "Work") {
-        setCurMode(curCycle % cyclesConfig.longBreakInterval === 0 ? "Long Break" : "Short Break");
-    } else {
-        setCurMode("Work");
-        setCurCycle(curCycle + 1);
-    }
+    const [curMode, setCurMode] =
+        useState<keyof typeof cyclesConfig.durations>("Work");
 
     const durSec: number = cyclesConfig.durations[curMode];
 
@@ -26,7 +20,20 @@ export default function Clock() {
                     if (prev <= 1) {
                         clearInterval(countdown);
                         setCounting(false);
-                        return 0;
+
+                        // Decide next timer mode
+                        if (curMode === "Work") {
+                            setCurMode(
+                                curCycle % cyclesConfig.longBreakInterval === 0
+                                    ? "Long Break"
+                                    : "Short Break",
+                            );
+                        } else {
+                            setCurMode("Work");
+                            setCurCycle(curCycle + 1);
+                        }
+
+                        return cyclesConfig.durations[curMode];
                     }
 
                     return prev - 1;
@@ -48,15 +55,17 @@ export default function Clock() {
                 <ButtonCont></ButtonCont>
             </div>
             <div className="clock__watch">
-                <div className="clock__timer">{time}</div>
+                <div className="clock__status">
+                    <div>{curMode}</div>
+                    <div>{time}</div>
+                </div>
                 <button
                     className="clock__toggle"
                     onClick={() => {
-                        console.log("clicked");    
                         setCounting(!counting);
                     }}
                 >
-                    {counting ? 'stop' : 'start'}
+                    {counting ? "pause" : "start"}
                 </button>
             </div>
         </div>

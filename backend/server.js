@@ -6,6 +6,7 @@ const PORT = 5123;
 
 // Simple middleware -- Middleware runs between the request (client) and the route handler. Therefore it is run with every request.
 // Mount new middleware using .use()
+app.use(cors())
 app.use(express.json());
 
 app.get('/', (req, res) => {
