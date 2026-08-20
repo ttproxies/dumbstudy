@@ -1,12 +1,19 @@
 import { useState, useEffect } from "react";
 import ButtonCont from "./ButtonCont";
-import cycles from "../configs/cycles.js";
+import cyclesConfig from "../configs/cycles";
 
 export default function Clock() {
-    let [cyclesCompleted, setCyclesCompleted] = useState(0);
-    let [curCycle, setCurCycle] = useState(0);
+    const [curCycle, setCurCycle] = useState(1); // The current cycle iteration
+    const [curMode, setCurMode] = useState<keyof typeof cyclesConfig.durations>("Work")
 
-    const durSec = cycles.durations[cycles.pattern[cyclesCompleted % cycles.pattern.length]];
+    if (curMode === "Work") {
+        setCurMode(curCycle % cyclesConfig.longBreakInterval === 0 ? "Long Break" : "Short Break");
+    } else {
+        setCurMode("Work");
+        setCurCycle(curCycle + 1);
+    }
+
+    const durSec: number = cyclesConfig.durations[curMode];
 
     let [remaining, setRemaining] = useState(durSec);
     let [counting, setCounting] = useState(false);
@@ -16,10 +23,8 @@ export default function Clock() {
         if (counting) {
             const countdown = setInterval(() => {
                 setRemaining((prev) => {
-                    // Errors with type assignment number | void: means sometimes void = nothing is returned
                     if (prev <= 1) {
                         clearInterval(countdown);
-                        setCyclesCompleted(cyclesCompleted + 1);
                         setCounting(false);
                         return 0;
                     }
@@ -28,7 +33,7 @@ export default function Clock() {
                 });
             }, 1000);
 
-            return () => clearInterval(countdown); // The interval persists page rerender, therefore cleaning the interval up if the effect is cut short is a good idea
+            return () => clearInterval(countdown); // Never keep interval running post-render
         }
     }, [counting]);
 
