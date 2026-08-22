@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import ButtonCont from "./ButtonCont";
+import Button from "./Button"
 import cyclesConfig from "../configs/cycles";
 
 type ModeType = keyof typeof cyclesConfig.durations;
@@ -19,7 +20,7 @@ export default function Clock() {
                 setRemaining((prevRem) => {
                     if (prevRem <= 1) {
                         clearInterval(countdown);
-                        setCounting(false);
+                        setCounting(false); // Forcefully update counting to avoid not regenerating countdown interval
                     }
 
                     return prevRem - 1;
@@ -62,14 +63,14 @@ export default function Clock() {
                     <TimerMode>{curMode}</TimerMode>
                     <TimerRemaining>{time}</TimerRemaining>
                 </div>
-                <button
-                    className="clock__toggle"
+                <Button
+                    type="button"
                     onClick={() => {
                         setCounting(!counting);
                     }}
                 >
                     {counting ? "pause" : "start"} / #{curCycle}
-                </button>
+                </Button>
             </div>
         </ClockContainer>
     );
