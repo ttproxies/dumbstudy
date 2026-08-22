@@ -17,8 +17,9 @@ export default function Clock() {
         if (counting) {
             const countdown = setInterval(() => {
                 setRemaining((prevRem) => {
-                    if (prevRem === 1) {
+                    if (prevRem <= 1) {
                         clearInterval(countdown);
+                        setCounting(false);
                     }
 
                     return prevRem - 1;
@@ -42,6 +43,7 @@ export default function Clock() {
                 setCurCycle((prevCycle) => prevCycle + 1);
             } // Increment cycle if finishing a break timer
 
+            setRemaining(cyclesConfig.durations[nextTimerMode]);
         }
     }, [remaining]);
 
@@ -86,7 +88,7 @@ const getNextTimerMode = function (prevMode: ModeType, currentCycle: number) {
 // css
 
 const TimerRemaining = styled.div`
-    font-size: 6rem;
+    font-size: 10rem;
     font-weight: 800;
 `;
 

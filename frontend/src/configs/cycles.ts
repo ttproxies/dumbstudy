@@ -2,14 +2,14 @@
 
 const cyclesConfig = {
     durations: {
-        "Work": 5,
-        "Short Break": 1,
-        "Long Break": 2
+        "Work": 4,
+        "Short Break": 2,
+        "Long Break": 3
     },
     modeNames: ["Work", "Short Break", "Long Break"],
     modeTypes: 3,
     longBreakInterval: 4,
-    autoStartNext: true
+    autoStartNext: false
 };
 
 export default cyclesConfig;
