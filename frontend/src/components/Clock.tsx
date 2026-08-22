@@ -21,17 +21,12 @@ export default function Clock() {
                         setCounting(false);
 
                         // Decide next timer mode
-                        setCurMode((prevMode) => {
-                            if (prevMode === "Work") {
-                                console.log(curCycle % cyclesConfig.longBreakInterval == 0 ? "Long Break" : "Short Break")
-                                return curCycle % cyclesConfig.longBreakInterval == 0 ? "Long Break" : "Short Break";
-                            }
+                        const nextTimerMode = getNextTimerMode(curMode, curCycle)
+                        setCurMode(nextTimerMode);
 
-                            setCurCycle(prevCycle => prevCycle + 1);
-                            return "Work";
-                        });
+                        if (curCycle % cyclesConfig.longBreakInterval !== 0) {setCurCycle(prevCycle => prevCycle + 1);}
 
-                        return cyclesConfig.durations[curMode];
+                        return cyclesConfig.durations[nextTimerMode]; // Important to note that state variables change on render, not assignment.
                     }
 
                     return prevRem - 1;
@@ -70,6 +65,16 @@ export default function Clock() {
     );
 }
 
+const getNextTimerMode = function (prevMode, currentCycle) {
+    if (prevMode === "Work") {
+        return currentCycle % cyclesConfig.longBreakInterval == 0
+            ? "Long Break"
+            : "Short Break";
+    }
+
+    return "Work";
+};
+
 // css
 
 const TimerRemaining = styled.div`
@@ -83,6 +88,6 @@ const TimerMode = styled.div`
 
 const ClockContainer = styled.div`
     text-align: center;
-    max-width: 500px;  
+    max-width: 500px;
     margin: auto;
 `;
