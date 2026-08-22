@@ -4,40 +4,37 @@ import ButtonCont from "./ButtonCont";
 import cyclesConfig from "../configs/cycles";
 
 export default function Clock() {
-    const [curCycle, setCurCycle] = useState(1); // The current cycle iteration
+    const [curCycle, setCurCycle] = useState(1); // The currently worked cycle. One cycle represents a work and a break block.
     const [curMode, setCurMode] =
         useState<keyof typeof cyclesConfig.durations>("Work");
 
-    const durSec: number = cyclesConfig.durations[curMode];
-
-    let [remaining, setRemaining] = useState(durSec);
-    let [counting, setCounting] = useState(false);
+    const [remaining, setRemaining] = useState(cyclesConfig.durations[curMode]);
+    const [counting, setCounting] = useState(false);
 
     useEffect(() => {
         // Run on load to set timer
         if (counting) {
             const countdown = setInterval(() => {
-                setRemaining((prev) => {
-                    if (prev <= 1) {
+                setRemaining((prevRem) => {
+                    if (prevRem <= 1) {
                         clearInterval(countdown);
                         setCounting(false);
 
                         // Decide next timer mode
-                        if (curMode === "Work") {
-                            setCurMode(
-                                curCycle % cyclesConfig.longBreakInterval === 0
-                                    ? "Long Break"
-                                    : "Short Break",
-                            );
-                        } else {
-                            setCurMode("Work");
-                            setCurCycle(curCycle + 1);
-                        }
+                        setCurMode((prevMode) => {
+                            if (prevMode === "Work") {
+                                console.log(curCycle % cyclesConfig.longBreakInterval == 0 ? "Long Break" : "Short Break")
+                                return curCycle % cyclesConfig.longBreakInterval == 0 ? "Long Break" : "Short Break";
+                            }
+
+                            setCurCycle(prevCycle => prevCycle + 1);
+                            return "Work";
+                        });
 
                         return cyclesConfig.durations[curMode];
                     }
 
-                    return prev - 1;
+                    return prevRem - 1;
                 });
             }, 1000);
 
@@ -78,7 +75,7 @@ export default function Clock() {
 const TimerRemaining = styled.div`
     font-size: 6rem;
     font-weight: 800;
-`
+`;
 
 const TimerMode = styled.div`
     text-align: center;
