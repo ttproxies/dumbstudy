@@ -6,29 +6,19 @@ import cyclesConfig from "../configs/cycles";
 type ModeType = keyof typeof cyclesConfig.durations;
 
 export default function Clock() {
-    
     const [curCycle, setCurCycle] = useState(1); // The currently worked cycle. One cycle represents a work and a break block.
     const [curMode, setCurMode] = useState<ModeType>("Work");
 
     const [remaining, setRemaining] = useState(cyclesConfig.durations[curMode]);
     const [counting, setCounting] = useState(false);
 
+    // Countdown
     useEffect(() => {
-        // Run on load to set timer
         if (counting) {
             const countdown = setInterval(() => {
                 setRemaining((prevRem) => {
-                    if (prevRem <= 1) {
+                    if (prevRem === 1) {
                         clearInterval(countdown);
-                        setCounting(false);
-
-                        // Decide next timer mode
-                        const nextTimerMode = getNextTimerMode(curMode, curCycle)
-                        setCurMode(nextTimerMode);
-
-                        if (curCycle % cyclesConfig.longBreakInterval == 0) {setCurCycle(prevCycle => prevCycle + 1);} // Increment cycle if 
-
-                        return cyclesConfig.durations[nextTimerMode]; // Important to note that state variables change on render, not assignment.
                     }
 
                     return prevRem - 1;
@@ -38,6 +28,22 @@ export default function Clock() {
             return () => clearInterval(countdown); // Never keep interval running post-render
         }
     }, [counting]);
+
+    // Handle mode change
+    useEffect(() => {
+        if (remaining === 0) {
+            setCounting(cyclesConfig.autoStartNext);
+    
+            // Decide next timer mode
+            const nextTimerMode = getNextTimerMode(curMode, curCycle);
+            setCurMode(nextTimerMode);
+
+            if (curMode !== "Work") {
+                setCurCycle((prevCycle) => prevCycle + 1);
+            } // Increment cycle if finishing a break timer
+
+        }
+    }, [remaining]);
 
     const minutes = Math.floor(remaining / 60);
     const seconds = remaining % 60;

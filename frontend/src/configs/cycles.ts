@@ -8,7 +8,8 @@ const cyclesConfig = {
     },
     modeNames: ["Work", "Short Break", "Long Break"],
     modeTypes: 3,
-    longBreakInterval: 4
+    longBreakInterval: 4,
+    autoStartNext: true
 };
 
 export default cyclesConfig;
