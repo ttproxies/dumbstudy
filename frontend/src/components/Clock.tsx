@@ -3,10 +3,12 @@ import styled from "styled-components";
 import ButtonCont from "./ButtonCont";
 import cyclesConfig from "../configs/cycles";
 
+type ModeType = keyof typeof cyclesConfig.durations;
+
 export default function Clock() {
+    
     const [curCycle, setCurCycle] = useState(1); // The currently worked cycle. One cycle represents a work and a break block.
-    const [curMode, setCurMode] =
-        useState<keyof typeof cyclesConfig.durations>("Work");
+    const [curMode, setCurMode] = useState<ModeType>("Work");
 
     const [remaining, setRemaining] = useState(cyclesConfig.durations[curMode]);
     const [counting, setCounting] = useState(false);
@@ -24,7 +26,7 @@ export default function Clock() {
                         const nextTimerMode = getNextTimerMode(curMode, curCycle)
                         setCurMode(nextTimerMode);
 
-                        if (curCycle % cyclesConfig.longBreakInterval !== 0) {setCurCycle(prevCycle => prevCycle + 1);}
+                        if (curCycle % cyclesConfig.longBreakInterval == 0) {setCurCycle(prevCycle => prevCycle + 1);} // Increment cycle if 
 
                         return cyclesConfig.durations[nextTimerMode]; // Important to note that state variables change on render, not assignment.
                     }
@@ -58,14 +60,14 @@ export default function Clock() {
                         setCounting(!counting);
                     }}
                 >
-                    {counting ? "pause" : "start"}
+                    {counting ? "pause" : "start"} / #{curCycle}
                 </button>
             </div>
         </ClockContainer>
     );
 }
 
-const getNextTimerMode = function (prevMode, currentCycle) {
+const getNextTimerMode = function (prevMode: ModeType, currentCycle: number) {
     if (prevMode === "Work") {
         return currentCycle % cyclesConfig.longBreakInterval == 0
             ? "Long Break"
