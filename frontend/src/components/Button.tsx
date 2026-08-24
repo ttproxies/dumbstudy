@@ -36,13 +36,20 @@ export function ButtonLink({ className, children, icon, to }: ButtonLinkProps) {
 }
 
 // Export style classes
-
-export const TimerButton = styled(Button)`
+const BaseButtonStyle = styled(Button)`
     background: #eee;
     padding: 0.5rem;
     font-size: 1.3rem;
+    border-radius: 0.5rem;
+    border: none;
+    font-family: inherit;
+`
+
+export const TimerButton = styled(BaseButtonStyle)`
+    letter-spacing: -5%;
+    text-transform: uppercase;
 `;
 
-export const ClockOptionButton = styled(Button)`
-
+export const ClockOptionButton = styled(BaseButtonStyle)`
+    font-size: 1rem;
 `;

@@ -73,7 +73,6 @@ export default function Clock() {
                     <TimerRemaining>{time}</TimerRemaining>
                 </div>
                 <TimerButton
-                    styleClass={TimerButton}
                     onClick={() => {
                         setCounting(!counting);
                     }}
@@ -114,5 +113,6 @@ const ClockContainer = styled.div`
 
 const ButtonCont = styled.ul`
     display: flex;
+    justify-content: center;
     gap: 1rem;
 `
