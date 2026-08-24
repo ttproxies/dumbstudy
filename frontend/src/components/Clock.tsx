@@ -98,7 +98,7 @@ const getNextTimerMode = function (prevMode: ModeType, currentCycle: number) {
 
 const TimerRemaining = styled.div`
     font-size: 10rem;
-    font-weight: 800;
+    font-weight: 900;
 `;
 
 const TimerMode = styled.div`

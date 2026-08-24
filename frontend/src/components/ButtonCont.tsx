@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 interface Props {
     children?: ReactNode;
+    className?: string;
     alignment: string;
 }
 
@@ -23,10 +24,9 @@ function ButtonCont({ children, alignment }: Props) {
 const InnerContainer = styled.ul<{ $alignment: string }>`
     display: flex;
     flex-flow: row nowrap;
-    justify-content: ${({ $alignment }) => $alignment}; //
+    justify-content: ${({ $alignment }) => $alignment};
+    list-style-type: none;
+    gap: 1rem;
 `
 
-export default styled(ButtonCont)`
-    display: flex;
-
-`
+export default styled(ButtonCont)``

@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import styled from "styled-components";
 
 interface Props {
-    className: string; // styled-components components break down into the original one + classes
+    className?: string; // styled-components components break down into the original one + classes
     children?: ReactNode;
     icon?: string;
 }
@@ -36,7 +36,7 @@ export function ButtonLink({ className, children, icon, to }: ButtonLinkProps) {
 }
 
 // Export style classes
-const BaseButtonStyle = styled(Button)`
+export const BaseButton = styled(Button)`
     background-color: #eee;
     padding: 0.5rem;
     font-size: 1.3rem;
@@ -50,11 +50,11 @@ const BaseButtonStyle = styled(Button)`
     }
 `
 
-export const TimerButton = styled(BaseButtonStyle)`
+export const TimerButton = styled(BaseButton)`
     letter-spacing: -5%;
     text-transform: uppercase;
 `;
 
-export const ClockOptionButton = styled(BaseButtonStyle)`
+export const ClockOptionButton = styled(BaseButton)`
     font-size: 1rem;
 `;
