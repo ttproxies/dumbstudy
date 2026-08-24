@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Button, ButtonLink, TimerButton, ClockOptionButton } from "./Button"
+import { TimerButton, ClockOptionButton } from "./Button"
 import cyclesConfig from "../configs/cycles";
 
 type ModeType = keyof typeof cyclesConfig.durations;

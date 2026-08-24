@@ -48,11 +48,22 @@ export const BaseButton = styled(Button)`
     &:hover {
         background-color: #ddd;
     }
+
+    &:active {
+        transform: translateY(2px);
+    }
 `
 
 export const TimerButton = styled(BaseButton)`
     letter-spacing: -5%;
     text-transform: uppercase;
+    border-bottom: 3px solid #bbb;
+    transform: translateY(-3px);
+
+    &:active {
+        border-bottom: none;
+        transform: none;
+    }
 `;
 
 export const ClockOptionButton = styled(BaseButton)`

@@ -1,4 +1,3 @@
-import type { ReactNode } from 'react'; 
 import styled from 'styled-components';
 import ButtonCont from './ButtonCont';
 import { BaseButton } from './Button';
