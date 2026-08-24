@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import ButtonCont from "./ButtonCont";
-import Button from "./Button"
+import { Button, ButtonLink, TimerButton, ClockOptionButton } from "./Button"
 import cyclesConfig from "../configs/cycles";
 
 type ModeType = keyof typeof cyclesConfig.durations;
@@ -56,21 +55,31 @@ export default function Clock() {
     return (
         <ClockContainer>
             <div className="clock__options">
-                <ButtonCont></ButtonCont>
+                <ButtonCont>
+                    <ClockOptionButton onClick={() => console.log('hello')}>
+                        work
+                    </ClockOptionButton>
+                    <ClockOptionButton onClick={() => console.log('hello')}>
+                        short break
+                    </ClockOptionButton>
+                    <ClockOptionButton onClick={() => console.log('hello')}>
+                        long break
+                    </ClockOptionButton>
+                </ButtonCont>
             </div>
             <div className="clock__watch">
                 <div className="clock__status">
                     <TimerMode>{curMode}</TimerMode>
                     <TimerRemaining>{time}</TimerRemaining>
                 </div>
-                <Button
-                    type="button"
+                <TimerButton
+                    styleClass={TimerButton}
                     onClick={() => {
                         setCounting(!counting);
                     }}
                 >
                     {counting ? "pause" : "start"} / #{curCycle}
-                </Button>
+                </TimerButton>
             </div>
         </ClockContainer>
     );
@@ -102,3 +111,8 @@ const ClockContainer = styled.div`
     max-width: 500px;
     margin: auto;
 `;
+
+const ButtonCont = styled.ul`
+    display: flex;
+    gap: 1rem;
+`

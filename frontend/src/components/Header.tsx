@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import ButtonCont from "./ButtonCont";
 
 export default function Header() {
     return (
@@ -9,7 +8,7 @@ export default function Header() {
                     <h1>dumbstudy</h1>
                 </div>
                 <nav className="header__nav">
-                    <ButtonCont></ButtonCont>
+                    
                 </nav>
             </header>
         </>
