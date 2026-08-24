@@ -37,13 +37,17 @@ export function ButtonLink({ className, children, icon, to }: ButtonLinkProps) {
 
 // Export style classes
 const BaseButtonStyle = styled(Button)`
-    background: #eee;
+    background-color: #eee;
     padding: 0.5rem;
     font-size: 1.3rem;
     border-radius: 0.5rem;
     border: none;
     font-family: inherit;
     cursor: pointer;
+
+    &:hover {
+        background-color: #ddd;
+    }
 `
 
 export const TimerButton = styled(BaseButtonStyle)`

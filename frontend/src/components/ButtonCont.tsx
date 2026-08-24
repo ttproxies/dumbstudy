@@ -7,19 +7,23 @@ interface Props {
     alignment: string;
 }
 
+// The $* syntax denotes a "transient" prop which aren't rendered as part of the DOM element attributes
 function ButtonCont({ children, alignment }: Props) {
     return (
-        <InnerContainer>
+        <InnerContainer $alignment={alignment}>
             {React.Children.map(children, (child) => (
-              <li>{child}</li>  
+              <li>{child}</li>
             ))}
         </InnerContainer>
     );
 }
 
-const InnerContainer = styled.ul`
+// We destructure props to only use { $alignment } and using it in the arrow function
+// This is equivalent to writing ${(props.$alignment) => $alignment}
+const InnerContainer = styled.ul<{ $alignment: string }>`
     display: flex;
     flex-flow: row nowrap;
+    justify-content: ${({ $alignment }) => $alignment}; //
 `
 
 export default styled(ButtonCont)`
