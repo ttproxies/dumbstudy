@@ -10,7 +10,7 @@ app.use(cors())
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.redirect("https://localhost:5173")
+    res.redirect("https://wlocalhost:5173")
 })
 
 app.get('/api/hai', (req, res) => {

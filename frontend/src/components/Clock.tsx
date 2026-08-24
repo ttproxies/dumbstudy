@@ -18,7 +18,7 @@ export default function Clock() {
         if (counting) {
             const countdown = setInterval(() => {
                 setRemaining((prevRem) => {
-                    if (prevRem <= 1) {
+                    if (prevRem === 1) {
                         clearInterval(countdown);
                         setCounting(false); // Forcefully update counting to avoid not regenerating countdown interval
                     }
