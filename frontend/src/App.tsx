@@ -55,7 +55,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     body {
-        font-family: "Noto Sans Mono", monospace;
+        font-family: "Average Sans", sans-serif;
     }
 
     body > * {

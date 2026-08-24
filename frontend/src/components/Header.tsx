@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
-export default function Header() {
+function Header(className: string) {
     return (
         <>
-            <header className="header">
-                <div className="header__logo">
-                    <h1>dumbstudy</h1>
+            <header className={className}>
+                <div>
+                    <HeaderLogo>dumbstudy</HeaderLogo>
                 </div>
                 <nav className="header__nav">
                     
@@ -14,3 +15,13 @@ export default function Header() {
         </>
     );
 }
+
+// Internal CSS
+
+const HeaderLogo = styled.h1``
+
+// Export CSS
+
+export default styled(Header)`
+    border-bottom: 1px solid black;
+`

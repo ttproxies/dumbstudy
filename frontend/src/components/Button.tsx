@@ -43,6 +43,7 @@ const BaseButtonStyle = styled(Button)`
     border-radius: 0.5rem;
     border: none;
     font-family: inherit;
+    cursor: pointer;
 `
 
 export const TimerButton = styled(BaseButtonStyle)`
